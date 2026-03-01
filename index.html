@@ -157,12 +157,10 @@
         .about-photo-wrapper { position: relative; }
         .about-photo {
             width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top;
-            border-radius: 8px; box-shadow: var(--shadow-lg);
+            border-radius: 8px; box-shadow: 0 20px 60px rgba(45, 34, 38, 0.15);
+            border: 3px solid rgba(192, 128, 129, 0.2);
         }
-        .about-photo-accent {
-            position: absolute; top: -12px; left: -12px; right: 12px; bottom: 12px;
-            border: 2px solid var(--accent-primary); border-radius: 8px; z-index: -1;
-        }
+        .about-photo-accent { display: none; }
         .about-bio h3 {
             font-family: 'Playfair Display', serif; font-size: 1.6rem;
             font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;
@@ -383,7 +381,7 @@
             </div>
             <div class="about-intro fade-in">
                 <div class="about-photo-wrapper">
-                    <img src="natalie.jpg" alt="Natálie — majitelka Studio Natali" class="about-photo">
+                    <img src="natali.png" alt="Natálie — majitelka Studio Natali" class="about-photo">
                     <div class="about-photo-accent"></div>
                 </div>
                 <div class="about-bio">
@@ -647,7 +645,7 @@
                         <div class="contact-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
                         <div class="contact-details">
                             <h3>Sociální sítě</h3>
-                            <a href="https://www.facebook.com/profile.php?id=100054553498498" target="_blank" rel="noopener">Facebook — Studio Natali</a>
+                            <a href="https://www.facebook.com/StudioNatali/" target="_blank" rel="noopener">Facebook — Studio Natali</a>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -672,10 +670,10 @@
                 <p>Pro objednání zavolejte nebo nám napište. Rádi vám poradíme s výběrem služeb a najdeme termín, který vám bude vyhovovat.</p>
                 <div class="cta-buttons">
                     <a href="tel:+420774889606" class="btn btn-primary">Zavolat 774 889 606</a>
-                    <a href="https://www.facebook.com/profile.php?id=100054553498498" class="btn btn-secondary" target="_blank" rel="noopener">Napsat na Facebook</a>
+                    <a href="https://www.facebook.com/StudioNatali/" class="btn btn-secondary" target="_blank" rel="noopener">Napsat na Facebook</a>
                 </div>
                 <div class="social-links">
-                    <a href="https://www.facebook.com/profile.php?id=100054553498498" class="social-link" target="_blank" rel="noopener" aria-label="Facebook">
+                    <a href="https://www.facebook.com/StudioNatali/" class="social-link" target="_blank" rel="noopener" aria-label="Facebook">
                         <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
                     </a>
                 </div>
