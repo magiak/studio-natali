@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Natali | Kadeřnictví Říčany</title>
+    <meta name="description" content="Studio Natali — kadeřnictví a nehtový salon v Říčanech u Prahy. Střihy, barvení, účesy, gelové nehty. 100% spokojených zákazníků.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent-primary: #C08081;
+            --accent-glow: #B76E79;
+            --accent-secondary: #D4A574;
+            --accent-light: rgba(192, 128, 129, 0.12);
+            --bg-primary: #FFFAF7;
+            --bg-card: #FFFFFF;
+            --bg-surface: #FDF2ED;
+            --bg-hero: linear-gradient(135deg, #FFFAF7 0%, #FDF2ED 50%, #F8E8E0 100%);
+            --text-primary: #2D2226;
+            --text-secondary: #6B5560;
+            --text-muted: #9A8A90;
+            --border-light: rgba(192, 128, 129, 0.15);
+            --shadow-sm: 0 2px 8px rgba(45, 34, 38, 0.06);
+            --shadow-md: 0 8px 30px rgba(45, 34, 38, 0.08);
+            --shadow-lg: 0 15px 50px rgba(45, 34, 38, 0.12);
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 1.25rem 2rem; transition: all 0.4s ease;
+        }
+        nav.scrolled {
+            background: rgba(255, 250, 247, 0.95);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            padding: 0.75rem 2rem; box-shadow: var(--shadow-sm);
+        }
+        .nav-container {
+            max-width: 1200px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .nav-logo {
+            text-decoration: none; display: flex; align-items: center; gap: 0.6rem;
+        }
+        .nav-logo svg { width: 28px; height: 28px; }
+        .nav-logo span {
+            font-family: 'Playfair Display', serif; font-size: 1.3rem;
+            font-weight: 700; color: var(--text-primary); letter-spacing: 0.5px;
+        }
+        .nav-links { display: flex; list-style: none; gap: 2.5rem; }
+        .nav-links a {
+            text-decoration: none; color: var(--text-secondary); font-size: 0.8rem;
+            font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--accent-primary); }
+        .hamburger {
+            display: none; flex-direction: column; gap: 5px;
+            background: none; border: none; cursor: pointer; padding: 4px;
+        }
+        .hamburger span {
+            width: 24px; height: 2px; background: var(--text-primary);
+            border-radius: 2px; transition: all 0.3s;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+            position: relative; text-align: center; overflow: hidden; background: var(--bg-hero);
+        }
+        .hero-bg { position: absolute; inset: 0; overflow: hidden; }
+        .hero-particle {
+            position: absolute; border-radius: 50%; opacity: 0;
+            animation: floatParticle linear infinite;
+        }
+        @keyframes floatParticle {
+            0% { opacity: 0; transform: translateY(100vh) scale(0); }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { opacity: 0; transform: translateY(-20vh) scale(1); }
+        }
+        .hero-content { position: relative; z-index: 2; padding: 0 2rem; }
+        .hero-subtitle {
+            font-size: 0.75rem; font-weight: 600; letter-spacing: 4px;
+            text-transform: uppercase; color: var(--accent-primary); margin-bottom: 1.5rem;
+        }
+        .hero-title {
+            font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 700; color: var(--text-primary); line-height: 1.1; margin-bottom: 1rem;
+        }
+        .hero-title em { font-style: italic; color: var(--accent-glow); }
+        .hero-tagline {
+            font-size: 1.15rem; color: var(--text-secondary); max-width: 500px;
+            margin: 0 auto 2.5rem; font-weight: 300; line-height: 1.8;
+        }
+        .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .hero-rating {
+            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+            margin-top: 2.5rem; font-size: 0.85rem; color: var(--text-muted);
+        }
+        .hero-rating .stars { color: var(--accent-secondary); font-size: 1rem; letter-spacing: 2px; }
+        .scroll-indicator {
+            position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+            z-index: 2; animation: bounceDown 2s ease-in-out infinite;
+        }
+        .scroll-indicator svg { width: 24px; height: 24px; stroke: var(--text-muted); }
+        @keyframes bounceDown {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-block; padding: 1rem 2.2rem; text-decoration: none;
+            font-size: 0.8rem; font-weight: 600; letter-spacing: 2px;
+            text-transform: uppercase; transition: all 0.3s; border-radius: 3px;
+        }
+        .btn-primary { background: var(--accent-primary); color: #FFFFFF; }
+        .btn-primary:hover {
+            background: var(--accent-glow); transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(192, 128, 129, 0.3);
+        }
+        .btn-secondary { border: 1.5px solid var(--accent-primary); color: var(--accent-primary); background: transparent; }
+        .btn-secondary:hover { background: var(--accent-primary); color: #FFFFFF; transform: translateY(-2px); }
+
+        /* ===== SECTIONS ===== */
+        section { padding: 6rem 2rem; }
+        .section-container { max-width: 1100px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 4rem; }
+        .section-label {
+            font-size: 0.75rem; font-weight: 600; letter-spacing: 3px;
+            text-transform: uppercase; color: var(--accent-primary); margin-bottom: 0.75rem;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif; font-size: 2.5rem;
+            font-weight: 700; color: var(--text-primary);
+        }
+        .section-divider { width: 60px; height: 2px; background: var(--accent-primary); margin: 1.5rem auto 0; }
+
+        /* ===== ABOUT ===== */
+        #about { background: var(--bg-card); }
+        .about-intro {
+            display: grid; grid-template-columns: 320px 1fr; gap: 4rem;
+            align-items: center; margin-bottom: 4rem;
+        }
+        .about-photo-wrapper { position: relative; }
+        .about-photo {
+            width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top;
+            border-radius: 8px; box-shadow: var(--shadow-lg);
+        }
+        .about-photo-accent {
+            position: absolute; top: -12px; left: -12px; right: 12px; bottom: 12px;
+            border: 2px solid var(--accent-primary); border-radius: 8px; z-index: -1;
+        }
+        .about-bio h3 {
+            font-family: 'Playfair Display', serif; font-size: 1.6rem;
+            font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;
+        }
+        .about-bio .about-role {
+            font-size: 0.85rem; font-weight: 500; color: var(--accent-primary);
+            letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 1.5rem;
+        }
+        .about-bio p {
+            color: var(--text-secondary); margin-bottom: 1.2rem; font-size: 1.05rem; line-height: 1.8;
+        }
+        .about-features {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem;
+        }
+        .feature {
+            padding: 1.8rem; background: var(--bg-surface); border-radius: 6px;
+            border: 1px solid var(--border-light); transition: all 0.3s;
+        }
+        .feature:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+        .feature-icon { font-size: 1.8rem; margin-bottom: 0.8rem; }
+        .feature h3 {
+            font-family: 'Playfair Display', serif; font-size: 1rem;
+            font-weight: 600; color: var(--text-primary); margin-bottom: 0.4rem;
+        }
+        .feature p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+
+        /* ===== SERVICES ===== */
+        #services { background: var(--bg-surface); }
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        .menu-category {
+            padding: 2.5rem; background: var(--bg-card); border: 1px solid var(--border-light);
+            border-radius: 6px; transition: all 0.3s;
+        }
+        .menu-category:hover {
+            border-color: rgba(192, 128, 129, 0.3); transform: translateY(-4px); box-shadow: var(--shadow-lg);
+        }
+        .menu-category-icon { font-size: 2rem; margin-bottom: 1rem; }
+        .menu-category h3 {
+            font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700;
+            color: var(--text-primary); margin-bottom: 1.5rem; padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .menu-item {
+            display: flex; justify-content: space-between; align-items: baseline;
+            padding: 0.6rem 0; border-bottom: 1px dotted rgba(192, 128, 129, 0.1);
+        }
+        .menu-item:last-child { border-bottom: none; }
+        .menu-item-name { font-size: 0.95rem; color: var(--text-secondary); }
+        .menu-item-price { font-size: 0.9rem; font-weight: 600; color: var(--accent-primary); white-space: nowrap; margin-left: 1rem; }
+        .price-note { font-size: 0.8rem; color: var(--text-muted); text-align: center; margin-top: 2rem; font-style: italic; }
+
+        /* ===== REVIEWS ===== */
+        #reviews { background: var(--bg-card); }
+        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+        .review-card {
+            padding: 2rem; background: var(--bg-surface); border: 1px solid var(--border-light);
+            border-radius: 6px; transition: all 0.3s;
+        }
+        .review-card:hover { border-color: rgba(192, 128, 129, 0.25); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+        .review-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; }
+        .review-avatar {
+            width: 42px; height: 42px; border-radius: 50%; background: var(--accent-primary);
+            color: #FFFFFF; display: flex; align-items: center; justify-content: center;
+            font-weight: 600; font-size: 1rem;
+        }
+        .review-author { display: flex; flex-direction: column; }
+        .review-name { font-weight: 600; font-size: 0.95rem; color: var(--text-primary); }
+        .review-source { font-size: 0.75rem; color: var(--text-muted); }
+        .review-stars { color: var(--accent-secondary); font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 0.8rem; }
+        .review-text { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.7; font-style: italic; }
+        .reviews-summary {
+            text-align: center; margin-top: 3rem; padding: 2rem;
+            background: var(--bg-surface); border-radius: 6px; border: 1px solid var(--border-light);
+        }
+        .reviews-summary-stars { font-size: 1.8rem; color: var(--accent-secondary); letter-spacing: 4px; margin-bottom: 0.5rem; }
+        .reviews-summary p { color: var(--text-muted); font-size: 0.9rem; }
+        .reviews-summary strong { color: var(--text-primary); }
+
+        /* ===== HOURS ===== */
+        #hours { background: var(--bg-surface); }
+        .hours-wrapper {
+            max-width: 500px; margin: 0 auto; background: var(--bg-card);
+            border-radius: 6px; border: 1px solid var(--border-light); overflow: hidden;
+        }
+        .hours-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 2rem; border-bottom: 1px solid rgba(192, 128, 129, 0.06); transition: all 0.3s;
+        }
+        .hours-row:last-child { border-bottom: none; }
+        .hours-row.today { background: var(--accent-light); border-left: 3px solid var(--accent-primary); }
+        .hours-day { font-weight: 500; color: var(--text-primary); font-size: 0.95rem; }
+        .hours-time { color: var(--text-secondary); font-size: 0.95rem; }
+        .hours-row.today .hours-day { font-weight: 700; color: var(--accent-glow); }
+        .hours-row.today .hours-time { color: var(--accent-glow); font-weight: 600; }
+
+        /* ===== LOCATION ===== */
+        #location { background: var(--bg-card); }
+        .location-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+        .map-container { border-radius: 6px; overflow: hidden; border: 1px solid var(--border-light); box-shadow: var(--shadow-sm); }
+        .map-container iframe { width: 100%; height: 380px; border: 0; display: block; }
+        .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+        .contact-item { display: flex; align-items: flex-start; gap: 1rem; }
+        .contact-icon {
+            width: 44px; height: 44px; border-radius: 50%; background: var(--bg-surface);
+            border: 1px solid var(--border-light); display: flex; align-items: center;
+            justify-content: center; flex-shrink: 0;
+        }
+        .contact-icon svg { width: 18px; height: 18px; stroke: var(--accent-primary); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .contact-details h3 { font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.3rem; }
+        .contact-details p, .contact-details a { font-size: 1rem; color: var(--text-primary); text-decoration: none; transition: color 0.3s; }
+        .contact-details a:hover { color: var(--accent-primary); }
+
+        /* ===== CTA ===== */
+        #cta { background: var(--bg-surface); text-align: center; }
+        .cta-content { max-width: 600px; margin: 0 auto; }
+        .cta-content .section-title { margin-bottom: 1rem; }
+        .cta-content p { color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 2.5rem; line-height: 1.8; }
+        .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+        .social-links { display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; }
+        .social-link {
+            width: 48px; height: 48px; border-radius: 50%; border: 1.5px solid var(--border-light);
+            display: flex; align-items: center; justify-content: center; transition: all 0.3s; text-decoration: none;
+        }
+        .social-link:hover { background: var(--accent-primary); border-color: var(--accent-primary); }
+        .social-link svg { width: 20px; height: 20px; fill: var(--accent-primary); transition: fill 0.3s; }
+        .social-link:hover svg { fill: #FFFFFF; }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--text-primary); color: rgba(255, 255, 255, 0.5);
+            text-align: center; padding: 2rem; font-size: 0.8rem; letter-spacing: 0.5px;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-links.active {
+                display: flex; flex-direction: column; position: absolute;
+                top: 100%; left: 0; right: 0; background: rgba(255, 250, 247, 0.98);
+                backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+                padding: 2rem; gap: 1.5rem; text-align: center; box-shadow: var(--shadow-md);
+            }
+            .hamburger { display: flex; }
+            .hero-title { font-size: clamp(2.2rem, 10vw, 3.5rem); }
+            section { padding: 4rem 1.5rem; }
+            .section-title { font-size: 2rem; }
+            .about-intro { grid-template-columns: 1fr; gap: 2.5rem; }
+            .about-photo-wrapper { max-width: 280px; margin: 0 auto; }
+            .about-features { grid-template-columns: 1fr 1fr; gap: 1rem; }
+            .menu-grid { grid-template-columns: 1fr; }
+            .reviews-grid { grid-template-columns: 1fr; }
+            .location-grid { grid-template-columns: 1fr; }
+            .map-container iframe { height: 280px; }
+            .hours-row { padding: 0.8rem 1.5rem; }
+            .hero-cta { flex-direction: column; align-items: center; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+        }
+        @media (max-width: 480px) {
+            .about-features { grid-template-columns: 1fr; }
+            .feature { padding: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <svg viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="13" stroke="#C08081" stroke-width="1.5"/><path d="M9 19c0-3 2.5-5 5-5s5 2 5 5" stroke="#C08081" stroke-width="1.5" stroke-linecap="round"/><circle cx="14" cy="10" r="3.5" stroke="#C08081" stroke-width="1.5"/></svg>
+                <span>Studio Natali</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">O nás</a></li>
+                <li><a href="#services">Služby</a></li>
+                <li><a href="#reviews">Recenze</a></li>
+                <li><a href="#hours">Otevírací doba</a></li>
+                <li><a href="#location">Kontakt</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-bg" id="heroBg"></div>
+        <div class="hero-content">
+            <p class="hero-subtitle">Kadeřnictví & Nehtový salon · Říčany</p>
+            <h1 class="hero-title">Studio <em>Natali</em></h1>
+            <p class="hero-tagline">Vaše krása je naším posláním. Profesionální péče o vlasy i nehty v přívětivém prostředí.</p>
+            <div class="hero-cta">
+                <a href="tel:+420774889606" class="btn btn-primary">Zavolejte nám</a>
+                <a href="#services" class="btn btn-secondary">Naše služby</a>
+            </div>
+            <div class="hero-rating">
+                <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                <span>5,0 / 5 — 100 % spokojených zákazníků</span>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+        <div class="section-container">
+            <div class="section-header fade-in">
+                <p class="section-label">O nás</p>
+                <h2 class="section-title">Vítejte ve Studiu Natali</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="about-intro fade-in">
+                <div class="about-photo-wrapper">
+                    <img src="natalie.jpg" alt="Natálie — majitelka Studio Natali" class="about-photo">
+                    <div class="about-photo-accent"></div>
+                </div>
+                <div class="about-bio">
+                    <h3>Natálie</h3>
+                    <p class="about-role">Majitelka & Kadeřnice</p>
+                    <p>Již řadu let se starám o krásu a spokojenost svých zákazníků s láskou k řemeslu a důrazem na detail. Studio Natali je útulné kadeřnictví a nehtový salon v Říčanech u Prahy, kde se budete cítit jako doma.</p>
+                    <p>Nabízím komplexní péči o vlasy — od stříhání a barvení až po společenské účesy. Kromě toho u nás najdete i profesionální péči o nehty. Každý zákazník si zaslouží individuální přístup a výsledek, který ho potěší.</p>
+                    <p>Přijďte se přesvědčit sami — těšíme se na vás!</p>
+                </div>
+            </div>
+            <div class="about-features fade-in">
+                <div class="feature">
+                    <div class="feature-icon">&#9986;</div>
+                    <h3>Precizní střihy</h3>
+                    <p>Dámské i pánské střihy přesně podle vašich představ</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">&#127912;</div>
+                    <h3>Barvení vlasů</h3>
+                    <p>Melíry, balayage, přeliv i barvení celé hlavy</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">&#128133;</div>
+                    <h3>Nehtový design</h3>
+                    <p>Gelové nehty, manikúra a kreativní nail art</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">&#10084;&#65039;</div>
+                    <h3>Osobní přístup</h3>
+                    <p>Každý zákazník je pro nás jedinečný</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+        <div class="section-container">
+            <div class="section-header fade-in">
+                <p class="section-label">Naše služby</p>
+                <h2 class="section-title">Ceník služeb</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-category fade-in">
+                    <div class="menu-category-icon">&#9986;</div>
+                    <h3>Dámské střihy</h3>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Střih + foukaná</span>
+                        <span class="menu-item-price">od 450 Kč</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Střih bez foukané</span>
+                        <span class="menu-item-price">od 350 Kč</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Dětský střih</span>
+                        <span class="menu-item-price">od 200 Kč</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Pánský střih</span>
+                        <span class="menu-item-price">od 250 Kč</span>
+                    </div>
+                </div>
+                <div class="menu-category fade-in">
+                    <div class="menu-category-icon">&#127912;</div>
+                    <h3>Barvení</h3>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Barvení celé hlavy</span>
+                        <span class="menu-item-price">od 800 Kč</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Melír</span>
+                        <span class="menu-item-price">od 900 Kč</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Balayage</span>
+                        <span class="menu-item-price">od 1 500 Kč</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Přeliv</span>
+                        <span class="menu-item-price">od 500 Kč</span>
+                    </div>
+                </div>
+                <div class="menu-category fade-in">
+                    <div class="menu-category-icon">&#128135;&#8205;&#9792;&#65039;</div>
+                    <h3>Účesy & Styling</h3>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Společenský účes</span>
+                        <span class="menu-item-price">od 600 Kč</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Svatební účes</span>
+                        <span class="menu-item-price">od 1 200 Kč</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Foukaná</span>
+                        <span class="menu-item-price">od 250 Kč</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Žehlení / Kulma</span>
+                        <span class="menu-item-price">od 300 Kč</span>
+                    </div>
+                </div>
+                <div class="menu-category fade-in">
+                    <div class="menu-category-icon">&#128133;</div>
+                    <h3>Nehty</h3>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Gelové nehty</span>
+                        <span class="menu-item-price">od 600 Kč</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Manikúra</span>
+                        <span class="menu-item-price">od 350 Kč</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Lakování</span>
+                        <span class="menu-item-price">od 200 Kč</span>
+                    </div>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Doplnění gelu</span>
+                        <span class="menu-item-price">od 450 Kč</span>
+                    </div>
+                </div>
+            </div>
+            <p class="price-note fade-in">* Ceny jsou orientační a mohou se lišit dle délky vlasů a náročnosti služby. Přesnou cenu vám sdělíme po konzultaci.</p>
+        </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section id="reviews">
+        <div class="section-container">
+            <div class="section-header fade-in">
+                <p class="section-label">Recenze</p>
+                <h2 class="section-title">Co říkají naši zákazníci</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="reviews-grid">
+                <div class="review-card fade-in">
+                    <div class="review-header">
+                        <div class="review-avatar">D</div>
+                        <div class="review-author">
+                            <span class="review-name">Dagmar Roubalová</span>
+                            <span class="review-source">Facebook</span>
+                        </div>
+                    </div>
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <div class="review-text">„Jednoduše super, chodím tam pravidelně a vždy spokojenost."</div>
+                </div>
+                <div class="review-card fade-in">
+                    <div class="review-header">
+                        <div class="review-avatar">M</div>
+                        <div class="review-author">
+                            <span class="review-name">Marie Šídlová</span>
+                            <span class="review-source">Google</span>
+                        </div>
+                    </div>
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <div class="review-text">„Paní Natálie je moc šikovná, moc jsem si užila strávený čas v kadeřnictví, ale úplně nejvíc mě příjemně překvapila cena za barvení a střih."</div>
+                </div>
+                <div class="review-card fade-in">
+                    <div class="review-header">
+                        <div class="review-avatar">M</div>
+                        <div class="review-author">
+                            <span class="review-name">Michaela Mazuchová</span>
+                            <span class="review-source">Facebook</span>
+                        </div>
+                    </div>
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <div class="review-text">„Velká ochota, preciznost, prostě bomba."</div>
+                </div>
+                <div class="review-card fade-in">
+                    <div class="review-header">
+                        <div class="review-avatar">T</div>
+                        <div class="review-author">
+                            <span class="review-name">Tess Přibilová</span>
+                            <span class="review-source">Google</span>
+                        </div>
+                    </div>
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <div class="review-text">„Doporučuji :) paní velice milá, šikovná a hezky jsme si popovídaly. Na nehty už jedině k paní Natálce."</div>
+                </div>
+                <div class="review-card fade-in">
+                    <div class="review-header">
+                        <div class="review-avatar">K</div>
+                        <div class="review-author">
+                            <span class="review-name">Kristina Štědrá</span>
+                            <span class="review-source">Facebook</span>
+                        </div>
+                    </div>
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <div class="review-text">„Natalka je moc ochotná a úžasná, děkuji moc za krásný účes."</div>
+                </div>
+                <div class="review-card fade-in">
+                    <div class="review-header">
+                        <div class="review-avatar">S</div>
+                        <div class="review-author">
+                            <span class="review-name">Soňa Piskáčková</span>
+                            <span class="review-source">Facebook</span>
+                        </div>
+                    </div>
+                    <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    <div class="review-text">„Luxusní salon s profesionálním přístupem."</div>
+                </div>
+            </div>
+            <div class="reviews-summary fade-in">
+                <div class="reviews-summary-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p><strong>5,0 z 5</strong> — Google (8 recenzí) · <strong>100 %</strong> doporučuje na Facebooku (10 recenzí)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOURS -->
+    <section id="hours">
+        <div class="section-container">
+            <div class="section-header fade-in">
+                <p class="section-label">Otevírací doba</p>
+                <h2 class="section-title">Kdy nás najdete</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="hours-wrapper fade-in">
+                <div class="hours-row" data-day="1"><span class="hours-day">Pondělí</span><span class="hours-time">8:30 – 18:00</span></div>
+                <div class="hours-row" data-day="2"><span class="hours-day">Úterý</span><span class="hours-time">8:30 – 18:00</span></div>
+                <div class="hours-row" data-day="3"><span class="hours-day">Středa</span><span class="hours-time">8:30 – 18:00</span></div>
+                <div class="hours-row" data-day="4"><span class="hours-day">Čtvrtek</span><span class="hours-time">8:30 – 18:00</span></div>
+                <div class="hours-row" data-day="5"><span class="hours-day">Pátek</span><span class="hours-time">8:30 – 18:00</span></div>
+                <div class="hours-row" data-day="6"><span class="hours-day">Sobota</span><span class="hours-time">8:30 – 18:00</span></div>
+                <div class="hours-row" data-day="0"><span class="hours-day">Neděle</span><span class="hours-time">Dle dohody</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOCATION -->
+    <section id="location">
+        <div class="section-container">
+            <div class="section-header fade-in">
+                <p class="section-label">Kde nás najdete</p>
+                <h2 class="section-title">Kontakt & Mapa</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="location-grid">
+                <div class="map-container fade-in">
+                    <iframe src="https://maps.google.com/maps?q=%C4%8Cernokosteleck%C3%A1+80%2F42%2C+251+01+%C5%98%C3%AD%C4%8Dany+u+Prahy&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <div class="contact-info fade-in">
+                    <div class="contact-item">
+                        <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                        <div class="contact-details">
+                            <h3>Adresa</h3>
+                            <p>Černokostelecká 80/42<br>251 01 Říčany u Prahy</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+                        <div class="contact-details">
+                            <h3>Telefon</h3>
+                            <a href="tel:+420774889606">774 889 606</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+                        <div class="contact-details">
+                            <h3>Sociální sítě</h3>
+                            <a href="https://www.facebook.com/profile.php?id=100054553498498" target="_blank" rel="noopener">Facebook — Studio Natali</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+                        <div class="contact-details">
+                            <h3>Otevírací doba</h3>
+                            <p>Po–So: 8:30 – 18:00<br>Ne: Dle dohody</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta">
+        <div class="section-container">
+            <div class="cta-content fade-in">
+                <p class="section-label">Rezervace</p>
+                <h2 class="section-title">Objednejte se</h2>
+                <div class="section-divider" style="margin-bottom: 2rem;"></div>
+                <p>Pro objednání zavolejte nebo nám napište. Rádi vám poradíme s výběrem služeb a najdeme termín, který vám bude vyhovovat.</p>
+                <div class="cta-buttons">
+                    <a href="tel:+420774889606" class="btn btn-primary">Zavolat 774 889 606</a>
+                    <a href="https://www.facebook.com/profile.php?id=100054553498498" class="btn btn-secondary" target="_blank" rel="noopener">Napsat na Facebook</a>
+                </div>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=100054553498498" class="social-link" target="_blank" rel="noopener" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        &copy; 2026 Studio Natali. Všechna práva vyhrazena.
+    </footer>
+
+    <script>
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => navLinks.classList.toggle('active'));
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => navLinks.classList.remove('active'));
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        const today = new Date().getDay();
+        const todayRow = document.querySelector(`.hours-row[data-day="${today}"]`);
+        if (todayRow) todayRow.classList.add('today');
+
+        (function() {
+            const heroBg = document.getElementById('heroBg');
+            const colors = ['rgba(192,128,129,0.3)', 'rgba(212,165,116,0.25)', 'rgba(183,110,121,0.2)', 'rgba(192,128,129,0.15)'];
+            for (let i = 0; i < 20; i++) {
+                const p = document.createElement('div');
+                p.classList.add('hero-particle');
+                const size = Math.random() * 10 + 4;
+                p.style.width = size + 'px';
+                p.style.height = size + 'px';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.background = colors[Math.floor(Math.random() * colors.length)];
+                p.style.animationDuration = (Math.random() * 12 + 10) + 's';
+                p.style.animationDelay = (Math.random() * 10) + 's';
+                heroBg.appendChild(p);
+            }
+        })();
+    </script>
+</body>
+</html>
