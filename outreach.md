@@ -9,4 +9,4 @@
 
 Dobrý den, jmenuji se Lukáš a zabývám se tvorbou webových stránek pro místní podniky. Pro Studio Natali jsem připravil ukázkový web s vaším ceníkem, kontakty a otevírací dobou — můžete se podívat zde: natali.lukaskmoch.cz
 
-Je to zcela nezávazné. Pokud byste měla zájem web používat, rád se domluvíme na podmínkách. Hezký den, Lukáš
+Je to zcela nezávazné. Pokud byste měla zájem web používat, rád se domluvím na podmínkách. Hezký den, Lukáš

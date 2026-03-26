@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="cs" class="dark-theme">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Natali | Kadeřnictví Říčany</title>
+    <meta name="description" content="Studio Natali — kadeřnictví a nehtový salon v Říčanech u Prahy.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,400&family=Montserrat:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #0a0a09;
+            --bg-surface: #121110;
+            --bg-elevated: #1a1918;
+            --text-primary: #f0ebe1;
+            --text-secondary: #a39f97;
+            --text-muted: #6b6863;
+            --accent-red: #8c3a3a;
+            --accent-glow: rgba(140, 58, 58, 0.4);
+            --border-subtle: rgba(240, 235, 225, 0.08);
+
+            --font-display: 'Bodoni Moda', serif;
+            --font-body: 'Montserrat', sans-serif;
+
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --spacing-xl: 8rem;
+            --spacing-xxl: 12rem;
+
+            --container-w: 1400px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1,
+        h2,
+        h3,
+        h4,
+        .display-text {
+            font-family: var(--font-display);
+            font-weight: 400;
+            line-height: 1.1;
+        }
+
+        .heading-huge {
+            font-size: clamp(4rem, 12vw, 12rem);
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+        }
+
+        .heading-large {
+            font-size: clamp(3rem, 6vw, 6rem);
+            letter-spacing: -0.01em;
+        }
+
+        .heading-medium {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+        }
+
+        .text-accent {
+            color: var(--accent-red);
+            font-style: italic;
+        }
+
+        .kicker {
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--accent-red);
+            font-weight: 500;
+            display: block;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        /* --- LAYOUT UTILS --- */
+        .container {
+            max-width: var(--container-w);
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+
+        .grid-editorial {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: var(--spacing-md);
+        }
+
+        section {
+            padding: var(--spacing-xl) 0;
+            position: relative;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: var(--spacing-md) 0;
+            z-index: 100;
+            mix-blend-mode: difference;
+            transition: padding 0.5s ease;
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            letter-spacing: 0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: var(--spacing-md);
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0%;
+            height: 1px;
+            background-color: var(--text-primary);
+            transition: width 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: var(--spacing-xxl);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero-bg-accent {
+            position: absolute;
+            top: 20%;
+            right: -10%;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, var(--accent-glow) 0%, rgba(10, 10, 9, 0) 70%);
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        .hero .grid-editorial {
+            align-items: end;
+        }
+
+        .hero-title-wrapper {
+            grid-column: 1 / 13;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title-main {
+            display: block;
+            line-height: 0.85;
+            margin-left: -0.05em;
+            /* Optical alignment */
+        }
+
+        .hero-title-sub {
+            display: block;
+            text-align: right;
+            padding-right: 5%;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .hero-content {
+            grid-column: 7 / 12;
+            margin-top: var(--spacing-lg);
+        }
+
+        .hero-desc {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            border: 1px solid var(--text-primary);
+            color: var(--text-primary);
+            background: transparent;
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--text-primary);
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: -1;
+        }
+
+        .btn:hover {
+            color: var(--bg-base);
+        }
+
+        .btn:hover::before {
+            transform: translateY(0);
+        }
+
+        .btn-primary {
+            background: var(--accent-red);
+            border-color: var(--accent-red);
+            color: #fff;
+        }
+
+        .btn-primary::before {
+            background: #fff;
+        }
+
+        .btn-primary:hover {
+            color: var(--accent-red);
+        }
+
+        /* --- ABOUT SECTION --- */
+        .about-section {
+            background-color: var(--bg-surface);
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .about-image {
+            grid-column: 2 / 6;
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: grayscale(80%) contrast(1.1);
+            transition: filter 0.8s ease;
+        }
+
+        .about-image:hover img {
+            filter: grayscale(0%) contrast(1.05);
+        }
+
+        .about-text {
+            grid-column: 7 / 12;
+            padding-top: var(--spacing-lg);
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+            border-top: 1px solid var(--border-subtle);
+            padding-top: var(--spacing-md);
+        }
+
+        .feature-item h3 {
+            font-size: 1.25rem;
+            margin-bottom: var(--spacing-xs);
+            color: var(--text-primary);
+        }
+
+        .feature-item p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        /* --- SERVICES SECTION --- */
+        .services-section {
+            padding: var(--spacing-xxl) 0;
+        }
+
+        .services-header {
+            grid-column: 1 / 13;
+            margin-bottom: var(--spacing-xl);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: var(--spacing-md);
+        }
+
+        .service-list {
+            grid-column: 1 / 13;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-xl);
+        }
+
+        .service-category h3 {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-md);
+            color: var(--accent-red);
+            font-style: italic;
+        }
+
+        .service-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: var(--spacing-sm) 0;
+            border-bottom: 1px solid rgba(240, 235, 225, 0.05);
+            transition: padding-left 0.3s ease;
+        }
+
+        .service-item:hover {
+            padding-left: var(--spacing-xs);
+            background: linear-gradient(90deg, rgba(140, 58, 58, 0.1) 0%, transparent 100%);
+        }
+
+        .service-name {
+            font-size: 1.1rem;
+        }
+
+        .service-price {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+        }
+
+        /* --- REVIEWS SECTION --- */
+        .reviews-section {
+            background-color: var(--bg-elevated);
+            padding: var(--spacing-xxl) 0;
+            overflow: hidden;
+        }
+
+        .reviews-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .reviews-marquee {
+            display: flex;
+            gap: var(--spacing-lg);
+            width: max-content;
+            animation: marquee 40s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .review-card {
+            width: 450px;
+            padding: var(--spacing-md);
+            border: 1px solid var(--border-subtle);
+            background: var(--bg-surface);
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+
+        .review-text {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-style: italic;
+            line-height: 1.4;
+            flex-grow: 1;
+        }
+
+        .review-author {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-subtle);
+            padding-top: var(--spacing-sm);
+            margin-top: var(--spacing-sm);
+        }
+
+        .review-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .review-stars {
+            color: var(--accent-red);
+            letter-spacing: 0.2em;
+        }
+
+        /* --- CONTACT & FOOTER --- */
+        .contact-section {
+            padding: var(--spacing-xxl) 0;
+        }
+
+        .contact-grid {
+            grid-column: 1 / 13;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xl);
+        }
+
+        .contact-info-block {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .contact-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .contact-value {
+            font-size: 1.5rem;
+            font-family: var(--font-display);
+        }
+
+        .contact-value a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-value a:hover {
+            color: var(--accent-red);
+        }
+
+        .hours-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-sm);
+            font-size: 1.1rem;
+        }
+
+        .hours-day {
+            color: var(--text-secondary);
+        }
+
+        .map-wrapper {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            border: 1px solid var(--border-subtle);
+            filter: grayscale(100%) invert(90%) contrast(1.2);
+            opacity: 0.8;
+            transition: all 0.5s ease;
+        }
+
+        .map-wrapper:hover {
+            filter: grayscale(50%) invert(90%) contrast(1.1);
+            opacity: 1;
+        }
+
+        footer {
+            border-top: 1px solid var(--border-subtle);
+            padding: var(--spacing-md) 0;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* --- ANIMATIONS --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s cubic-bezier(0.19, 1, 0.22, 1), transform 1s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.4s;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 1024px) {
+            .heading-huge {
+                font-size: clamp(4rem, 10vw, 8rem);
+            }
+
+            .service-list {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-lg);
+            }
+
+            .about-image {
+                grid-column: 1 / 6;
+            }
+
+            .about-text {
+                grid-column: 6 / 13;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .grid-editorial {
+                display: flex;
+                flex-direction: column;
+                gap: var(--spacing-md);
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--bg-surface);
+                flex-direction: column;
+                padding: var(--spacing-md);
+                text-align: center;
+                border-bottom: 1px solid var(--border-subtle);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hero-title-main {
+                text-align: left;
+            }
+
+            .hero-title-sub {
+                text-align: left;
+                padding-right: 0;
+                margin-top: 1rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .map-wrapper {
+                height: 300px;
+                min-height: auto;
+                mt-4;
+                margin-top: var(--spacing-md);
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+
+            .hero,
+            section {
+                padding: var(--spacing-lg) 0;
+            }
+
+            .hero {
+                padding-top: var(--spacing-xxl);
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav id="navbar">
+        <div class="container nav-inner">
+            <a href="#" class="logo">NATALI</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">O nás</a></li>
+                <li><a href="#services">Služby</a></li>
+                <li><a href="#reviews">Recenze</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Menu">☰</button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-bg-accent"></div>
+        <div class="container grid-editorial">
+            <div class="hero-title-wrapper reveal">
+                <span class="kicker">Kadeřnictví & Nehtový salon · Říčany</span>
+                <h1 class="heading-huge hero-title-main">Studio</h1>
+                <h1 class="heading-huge hero-title-sub text-accent">Natali</h1>
+            </div>
+            <div class="hero-content reveal delay-2">
+                <p class="hero-desc">Vaše krása je naším posláním. Profesionální péče o vlasy i nehty v přívětivém,
+                    luxusním prostředí, kde detail tvoří dokonalost.</p>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="#contact" class="btn btn-primary">Rezervace</a>
+                    <a href="#services" class="btn">Naše služby</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="about-section">
+        <div class="container grid-editorial">
+            <div class="about-image reveal">
+                <img src="natali.png" alt="Natálie — majitelka Studio Natali">
+            </div>
+            <div class="about-text reveal delay-2">
+                <span class="kicker">Přijďte se přesvědčit</span>
+                <h2 class="heading-large" style="margin-bottom: var(--spacing-md);">Vítejte ve<br><span
+                        class="text-accent">Studiu Natali</span></h2>
+
+                <p>Již řadu let se starám o krásu a spokojenost svých zákazníků s láskou k řemeslu a důrazem na detail.
+                    Studio Natali je útulné kadeřnictví a nehtový salon v Říčanech u Prahy, kde se budete cítit jako
+                    doma.</p>
+                <p>Nabízím komplexní péči o vlasy — od stříhání a barvení až po společenské účesy. Kromě toho u nás
+                    najdete i profesionální péči o nehty. Každý zákazník si zaslouží individuální přístup a výsledek,
+                    který ho potěší.</p>
+
+                <div class="about-features">
+                    <div class="feature-item">
+                        <h3>01 / Precizní střihy</h3>
+                        <p>Dámské i pánské střihy přesně podle vašich představ a aktuálních trendů.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>02 / Barvení vlasů</h3>
+                        <p>Melíry, balayage, přeliv i barvení celé hlavy s maximální šetrností.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>03 / Nehtový design</h3>
+                        <p>Gelové nehty, manikúra a kreativní nail art pro dokonalý vzhled rukou.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>04 / Osobní přístup</h3>
+                        <p>Každý zákazník je pro nás jedinečný. Nasloucháme vašim přáním.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services-section">
+        <div class="container grid-editorial">
+            <div class="services-header reveal">
+                <h2 class="heading-large">Ceník <span class="text-accent">služeb</span></h2>
+                <span class="kicker" style="text-align: right; max-width: 200px;">* Ceny se mohou lišit dle
+                    náročnosti</span>
+            </div>
+
+            <div class="service-list">
+                <div class="service-category reveal delay-1">
+                    <h3>Dámské střihy</h3>
+                    <div class="service-item">
+                        <span class="service-name">Střih + foukaná</span>
+                        <span class="service-price">od 450 Kč</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-name">Střih bez foukané</span>
+                        <span class="service-price">od 350 Kč</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-name">Dětský střih</span>
+                        <span class="service-price">od 200 Kč</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-name">Pánský střih</span>
+                        <span class="service-price">od 250 Kč</span>
+                    </div>
+                </div>
+
+                <div class="service-category reveal delay-2">
+                    <h3>Barvení</h3>
+                    <div class="service-item">
+                        <span class="service-name">Barvení celé hlavy</span>
+                        <span class="service-price">od 800 Kč</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-name">Melír</span>
+                        <span class="service-price">od 900 Kč</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-name">Balayage</span>
+                        <span class="service-price">od 1 500 Kč</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-name">Přeliv</span>
+                        <span class="service-price">od 500 Kč</span>
+                    </div>
+                </div>
+
+                <div class="service-category reveal delay-1">
+                    <h3>Účesy & Styling</h3>
+                    <div class="service-item">
+                        <span class="service-name">Společenský účes</span>
+                        <span class="service-price">od 600 Kč</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-name">Svatební účes</span>
+                        <span class="service-price">od 1 200 Kč</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-name">Foukaná</span>
+                        <span class="service-price">od 250 Kč</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-name">Žehlení / Kulma</span>
+                        <span class="service-price">od 300 Kč</span>
+                    </div>
+                </div>
+
+                <div class="service-category reveal delay-2">
+                    <h3>Nehty</h3>
+                    <div class="service-item">
+                        <span class="service-name">Gelové nehty</span>
+                        <span class="service-price">od 600 Kč</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-name">Manikúra</span>
+                        <span class="service-price">od 350 Kč</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-name">Lakování</span>
+                        <span class="service-price">od 200 Kč</span>
+                    </div>
+                    <div class="service-item">
+                        <span class="service-name">Doplnění gelu</span>
+                        <span class="service-price">od 450 Kč</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="reviews-section">
+        <div class="container">
+            <div class="reviews-header reveal">
+                <span class="kicker">Spokojení klienti</span>
+                <h2 class="heading-medium">Co o nás říkají</h2>
+            </div>
+        </div>
+
+        <div class="reviews-marquee reveal delay-1">
+            <!-- Review Set 1 -->
+            <div class="review-card">
+                <p class="review-text">„Jednoduše super, chodím tam pravidelně a vždy spokojenost.“</p>
+                <div class="review-author">
+                    <span class="review-name">Dagmar Roubalová</span>
+                    <span class="review-stars">★★★★★</span>
+                </div>
+            </div>
+            <div class="review-card">
+                <p class="review-text">„Paní Natálie je moc šikovná... úplně nejvíc mě příjemně překvapila cena za
+                    barvení a střih.“</p>
+                <div class="review-author">
+                    <span class="review-name">Marie Šídlová</span>
+                    <span class="review-stars">★★★★★</span>
+                </div>
+            </div>
+            <div class="review-card">
+                <p class="review-text">„Velká ochota, preciznost, prostě bomba.“</p>
+                <div class="review-author">
+                    <span class="review-name">Michaela Mazuchová</span>
+                    <span class="review-stars">★★★★★</span>
+                </div>
+            </div>
+            <div class="review-card">
+                <p class="review-text">„Na nehty už jedině k paní Natálce.“</p>
+                <div class="review-author">
+                    <span class="review-name">Tess Přibilová</span>
+                    <span class="review-stars">★★★★★</span>
+                </div>
+            </div>
+            <div class="review-card">
+                <p class="review-text">„Luxusní salon s profesionálním přístupem.“</p>
+                <div class="review-author">
+                    <span class="review-name">Soňa Piskáčková</span>
+                    <span class="review-stars">★★★★★</span>
+                </div>
+            </div>
+
+            <!-- Review Set 2 (Duplicated for seamless loop) -->
+            <div class="review-card">
+                <p class="review-text">„Jednoduše super, chodím tam pravidelně a vždy spokojenost.“</p>
+                <div class="review-author">
+                    <span class="review-name">Dagmar Roubalová</span>
+                    <span class="review-stars">★★★★★</span>
+                </div>
+            </div>
+            <div class="review-card">
+                <p class="review-text">„Paní Natálie je moc šikovná... úplně nejvíc mě příjemně překvapila cena za
+                    barvení a střih.“</p>
+                <div class="review-author">
+                    <span class="review-name">Marie Šídlová</span>
+                    <span class="review-stars">★★★★★</span>
+                </div>
+            </div>
+            <div class="review-card">
+                <p class="review-text">„Velká ochota, preciznost, prostě bomba.“</p>
+                <div class="review-author">
+                    <span class="review-name">Michaela Mazuchová</span>
+                    <span class="review-stars">★★★★★</span>
+                </div>
+            </div>
+            <div class="review-card">
+                <p class="review-text">„Na nehty už jedině k paní Natálce.“</p>
+                <div class="review-author">
+                    <span class="review-name">Tess Přibilová</span>
+                    <span class="review-stars">★★★★★</span>
+                </div>
+            </div>
+            <div class="review-card">
+                <p class="review-text">„Luxusní salon s profesionálním přístupem.“</p>
+                <div class="review-author">
+                    <span class="review-name">Soňa Piskáčková</span>
+                    <span class="review-stars">★★★★★</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container grid-editorial">
+            <div class="contact-grid">
+                <div class="contact-details reveal">
+                    <span class="kicker">Objednejte se</span>
+                    <h2 class="heading-large" style="margin-bottom: var(--spacing-lg);">Kontakt</h2>
+
+                    <div class="contact-info-block">
+                        <div class="contact-label">Telefon</div>
+                        <div class="contact-value"><a href="tel:+420774889606">774 889 606</a></div>
+                    </div>
+
+                    <div class="contact-info-block">
+                        <div class="contact-label">Adresa</div>
+                        <div class="contact-value"
+                            style="font-family: var(--font-body); font-size: 1.2rem; font-weight: 300;">
+                            Černokostelecká 80/42<br>
+                            251 01 Říčany u Prahy
+                        </div>
+                    </div>
+
+                    <div class="contact-info-block">
+                        <div class="contact-label">Sledujte nás</div>
+                        <div class="contact-value" style="font-family: var(--font-body); font-size: 1.2rem;">
+                            <a href="https://www.facebook.com/StudioNatali/" target="_blank" rel="noopener">Facebook</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-info-block" style="margin-top: var(--spacing-lg);">
+                        <div class="contact-label">Otevírací doba</div>
+                        <div class="hours-grid">
+                            <span class="hours-day">Pondělí - Sobota</span>
+                            <span>8:30 – 18:00</span>
+                            <span class="hours-day">Neděle</span>
+                            <span>Dle dohody</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-map reveal delay-2">
+                    <iframe class="map-wrapper"
+                        src="https://maps.google.com/maps?q=%C4%8Cernokosteleck%C3%A1+80%2F42%2C+251+01+%C5%98%C3%AD%C4%8Dany+u+Prahy&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 STUDIO NATALI. VŠECHNA PRÁVA VYHRAZENA.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger Menu
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => navLinks.classList.remove('active'));
+        });
+
+        // Scroll Reveal Animations
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Optional: Stop observing once revealed
+                    // observer.unobserve(entry.target);
+                }
+            });
+        };
+
+        const revealOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealObserver = new IntersectionObserver(revealCallback, revealOptions);
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Dynamic Navbar Background on Scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(10, 10, 9, 0.9)';
+                navbar.style.backdropFilter = 'blur(10px)';
+                navbar.style.padding = '1rem 0';
+            } else {
+                navbar.style.background = 'transparent';
+                navbar.style.backdropFilter = 'none';
+                navbar.style.padding = '2rem 0';
+            }
+        });
+    </script>
+</body>
+
+</html>
